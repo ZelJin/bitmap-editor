@@ -4,37 +4,37 @@ require_relative '../lib/bitmap'
 RSpec.describe Bitmap, '#initialize' do
   context 'when n or m is negative' do
     it 'should raise an error' do
-      expect { Bitmap.new(-1, 1) }.to raise_error
+      expect { Bitmap.new(-1, 1) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(2, -3) }.to raise_error
+      expect { Bitmap.new(2, -3) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(-4, -5) }.to raise_error
+      expect { Bitmap.new(-4, -5) }.to raise_error RangeError
     end
   end
 
   context 'when n or m is zero' do
     it 'should raise an error' do
-      expect { Bitmap.new(0, 1) }.to raise_error
+      expect { Bitmap.new(0, 1) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(2, 0) }.to raise_error
+      expect { Bitmap.new(2, 0) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(0, 0) }.to raise_error
+      expect { Bitmap.new(0, 0) }.to raise_error RangeError
     end
   end
 
   context 'when n or m is out of bounds' do
     it 'should raise an error' do
-      expect { Bitmap.new(251, 24) }.to raise_error
+      expect { Bitmap.new(251, 24) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(250, 251) }.to raise_error
+      expect { Bitmap.new(250, 251) }.to raise_error RangeError
     end
     it 'should raise an error' do
-      expect { Bitmap.new(1234, 5678) }.to raise_error
+      expect { Bitmap.new(1234, 5678) }.to raise_error RangeError
     end
   end
 

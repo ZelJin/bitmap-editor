@@ -43,17 +43,17 @@ RSpec.describe Bitmap, '#initialize' do
     bitmap = Bitmap.new(n, m)
     bm = bitmap.bitmap
     it 'should have correct row length' do
-      expect(bm.size).to be(m)
+      expect(bm.length).to be(m)
     end
     it 'should have correct column length' do
       (1..m).each do |i|
-        expect(bm[i].size).to be(n)
+        expect(bm[i-1].length).to be(n)
       end
     end
     it 'should have correct pixel color' do
       (1..m).each do |i|
         (1..n).each do |j|
-          expect(bm[i][j]).to be('O')
+          expect(bm[i-1][j-1]).to eq('O')
         end
       end
     end

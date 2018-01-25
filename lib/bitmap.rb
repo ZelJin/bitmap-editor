@@ -7,7 +7,10 @@ class Bitmap
   # Initialize an empty bitmap of size n, m and fill it with white colour
   # represented by character O
   def initialize(n, m)
-
+    unless n.between?(1, 250) && m.between?(1, 250)
+      raise RangeError, "Bitmap size is out of range. Should be in between 1 and 250"
+    end
+    @bitmap = Array.new(m, Array.new(n, 'O'))
   end
 
   # Clear the bitmap by setting all pixels to white (O)

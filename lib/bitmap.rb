@@ -1,6 +1,9 @@
 # Bitmap is a representation of a bitmap as an M x N matrix of pixels,
 # where each element represents a colour
 class Bitmap
+  # This is used for testing purposes
+  attr_accessor :bitmap
+
   # Initialize an empty bitmap of size n, m and fill it with white colour
   # represented by character O
   def initialize(n, m)

@@ -19,13 +19,13 @@ class Bitmap {
 
   # Draw a vertical segment of colour c in column x between
   # rows y1 and y2 (inclusive)
-  def vertical_line(x, y1, y2, c) {
+  def vertical_segment(x, y1, y2, c) {
 
   }
 
   # Draw a horizontal segment of colour c in row y between
   # columns x1 and x2 (inclusive)
-  def horizontal_line(x1, x2, y, c) {
+  def horizontal_segment(x1, x2, y, c) {
 
   }
 

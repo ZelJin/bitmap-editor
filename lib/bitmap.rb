@@ -23,6 +23,14 @@ class Bitmap
 
   end
 
+  # Get the colour of the pixel
+  def get_colour(x, y)
+    unless valid_row?(y) && valid_column?(x)
+      raise ArgumentError, "Pixel (#{x}, #{y}) is out of range"
+    end
+    @bitmap[y-1][x-1]
+  end
+
   # Colour the pixel (x, y) with colour c
   def set_colour(x, y, c)
 

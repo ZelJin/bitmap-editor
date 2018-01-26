@@ -7,7 +7,11 @@ class Bitmap
     unless n.between?(1, 250) && m.between?(1, 250)
       raise ArgumentError, "Bitmap size is out of range [1, 250]"
     end
-    @bitmap = Array.new(m, Array.new(n, 'O'))
+    @bitmap = Array.new(m)
+    (1..m).each do |i|
+      @bitmap[i-1] = Array.new(n, 'O')
+    end
+  end
   end
 
   # Return the size of the bitmap

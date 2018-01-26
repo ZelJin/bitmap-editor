@@ -20,9 +20,10 @@ class Bitmap
 
   # Clear the bitmap by setting all pixels to white (O)
   def clear()
-    (1..@bitmap.length).each do |i|
-      (1..@bitmap[0].length).each do |j|
-        @bitmap[i-1][j-1] = 'O'
+    n, m = self.size
+    (1..n).each do |i|
+      (1..m).each do |j|
+        self.set_colour(i, j, 'O')
       end
     end
   end

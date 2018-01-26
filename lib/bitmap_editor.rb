@@ -1,4 +1,4 @@
-require_relative './bitmap'
+require './lib/bitmap'
 
 class BitmapEditor
 

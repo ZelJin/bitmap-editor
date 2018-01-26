@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../lib/bitmap'
+require './lib/bitmap'
 
 RSpec.describe Bitmap, '#initialize' do
   context 'when n or m is negative' do

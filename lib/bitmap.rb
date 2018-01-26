@@ -5,7 +5,7 @@ class Bitmap
   # represented by character O
   def initialize(n, m)
     unless n.between?(1, 250) && m.between?(1, 250)
-      raise ArgumentError, "Bitmap size is out of range [1, 250]"
+      raise ArgumentError, 'Bitmap size is out of range [1, 250]'
     end
     @bitmap = Array.new(m)
     (1..m).each do |i|
@@ -51,7 +51,7 @@ class Bitmap
   # rows y1 and y2 (inclusive)
   def vertical_segment(x, y1, y2, c)
     unless x_valid?(x) && y_valid?(y1) && y_valid?(y2)
-      raise ArgumentError, "Coordinates are out of range"
+      raise ArgumentError, 'Coordinates are out of range'
     end
     unless colour_valid?(c)
       raise ArgumentError, "Incorrect colour #{c}"
@@ -66,7 +66,7 @@ class Bitmap
   # columns x1 and x2 (inclusive)
   def horizontal_segment(x1, x2, y, c)
     unless x_valid?(x1) && x_valid?(x2) && y_valid?(y)
-      raise ArgumentError, "Coordinates are out of range"
+      raise ArgumentError, 'Coordinates are out of range'
     end
     unless colour_valid?(c)
       raise ArgumentError, "Incorrect colour #{c}"

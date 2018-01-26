@@ -5,8 +5,9 @@ class BitmapEditor
   def run(file)
     return puts 'please provide correct file' if file.nil? || !File.exists?(file)
     bitmap = nil
-    File.open(file).each do |line|
-      args = line.chomp.split(' ')
+    File.readlines(file).each do |line|
+      puts line
+      args = line.strip.split(' ')
       case args[0]
       when 'I'
         # Init command

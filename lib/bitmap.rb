@@ -58,7 +58,7 @@ class Bitmap
     end
     ymin, ymax = [y1, y2].minmax
     (ymin..ymax).each do |i|
-      @bitmap[i-1][x-1] = c
+      self.set_colour(x, i, c)
     end
   end
 

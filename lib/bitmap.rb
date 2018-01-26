@@ -8,7 +8,7 @@ class Bitmap
   # represented by character O
   def initialize(n, m)
     unless n.between?(1, 250) && m.between?(1, 250)
-      raise ArgumentError, "Bitmap size is out of range. Should be in between 1 and 250"
+      raise ArgumentError, "Bitmap size is out of range [1, 250]"
     end
     @bitmap = Array.new(m, Array.new(n, 'O'))
   end

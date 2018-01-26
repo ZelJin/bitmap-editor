@@ -16,7 +16,7 @@ class BitmapEditor
         begin
           bitmap = Bitmap.new(args[1], args[2])
         rescue ArgumentError => err
-          puts "Argument error: " + err
+          puts 'Argument error: ' + err.message
         end
       when 'C'
         # Clear command
@@ -29,7 +29,7 @@ class BitmapEditor
         begin
           bitmap.set_colour(args[1], args[2], args[3])
         rescue ArgumentError => err
-          puts "Argument error: " + err
+          puts 'Argument error: ' + err.message
         end
       when 'V'
         # Draw a vertical segment command
@@ -38,7 +38,7 @@ class BitmapEditor
         begin
           bitmap.vertical_segment(args[1], args[2], args[3], args[4])
         rescue ArgumentError => err
-          puts "Argument error: " + err
+          puts 'Argument error: ' + err.message
         end
       when 'H'
         # Draw a horizontal segment command

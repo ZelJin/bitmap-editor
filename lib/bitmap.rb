@@ -12,7 +12,6 @@ class Bitmap
       @bitmap[i-1] = Array.new(n, 'O')
     end
   end
-  end
 
   # Return the size of the bitmap
   def size()

@@ -47,7 +47,7 @@ class BitmapEditor
         begin
           bitmap.horizontal_segment(args[1], args[2], args[3], args[4])
         rescue ArgumentError => err
-          puts "Argument error: " + err
+          puts 'Argument error: ' + err.message
         end
       when 'S'
         # Print bitmap command

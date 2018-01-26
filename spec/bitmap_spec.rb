@@ -78,13 +78,15 @@ RSpec.describe Bitmap, '#set_colour' do
   context 'when parameters are correct' do
     it 'should paint the correct pixel' do
       @bitmap.set_colour(1, 1, 'C')
-      @bitmap.set_colour(2, 2, 'D')
-      @bitmap.set_colour(24, 25, 'E')
-      @bitmap.set_colour(25, 12, 'F')
+      @bitmap.set_colour(2, 1, 'D')
+      @bitmap.set_colour(1, 2, 'E')
+      @bitmap.set_colour(24, 25, 'F')
+      @bitmap.set_colour(25, 12, 'G')
       expect(@bitmap.get_colour(1, 1)).to eq('C')
-      expect(@bitmap.get_colour(2, 2)).to eq('D')
-      expect(@bitmap.get_colour(24, 25)).to eq('E')
-      expect(@bitmap.get_colour(25, 12)).to eq('F')
+      expect(@bitmap.get_colour(2, 1)).to eq('D')
+      expect(@bitmap.get_colour(1, 2)).to eq('E')
+      expect(@bitmap.get_colour(24, 25)).to eq('F')
+      expect(@bitmap.get_colour(25, 12)).to eq('G')
     end
   end
 end

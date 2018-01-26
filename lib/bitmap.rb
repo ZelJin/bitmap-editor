@@ -13,6 +13,11 @@ class Bitmap
     @bitmap = Array.new(m, Array.new(n, 'O'))
   end
 
+  # Return the size of the bitmap
+  def size()
+    return @bitmap[0].length, @bitmap.length
+  end
+
   # Clear the bitmap by setting all pixels to white (O)
   def clear()
 

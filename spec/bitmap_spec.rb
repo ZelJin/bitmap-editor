@@ -127,7 +127,69 @@ RSpec.describe Bitmap, '#clear' do
 end
 
 RSpec.describe Bitmap, '#vertical_segment' do
+  before (:each) do
+    @bitmap = Bitmap.new(25, 25)
+  end
 
+  context 'when coordinates are out of bounds' do
+    it 'should raise an error' do
+      expect { @bitmap.vertical_segment(26, 1, 1, 'C') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(-2, 1, 1, 'C') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(2, 0, 24, 'C') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(3, -5, 0, 'C') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(4, 26, 20, 'C') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(5, 30, 40, 'C') }.to raise_error ArgumentError
+    end
+  end
+
+  context 'when colour string is incorrect' do
+    it 'should raise an error' do
+      expect { @bitmap.vertical_segment(1, 1, 1, 'Ж') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, 'CS') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, 42) }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, nil) }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, 'k') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, '9') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, '@') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, ';') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, ' ') }.to raise_error ArgumentError
+      expect { @bitmap.vertical_segment(1, 1, 1, '🤷') }.to raise_error ArgumentError
+    end
+  end
+
+  context 'when y1 <= y2' do
+    it 'should paint a correct vertical segment' do
+      x, y1, y2 = 5, 1, 20
+      n, m = @bitmap.size
+      @bitmap.vertical_segment(x, y1, y2, 'C')
+      (1..n).each do |i|
+        (1..m).each do |j|
+          if i == x && j.between?(y1, y2)
+            expect(@bitmap.get_colour(i, j)).to eq('C')
+          else
+            expect(@bitmap.get_colour(i, j)).to eq('O')
+          end
+        end
+      end
+    end
+  end
+
+  context 'when y1 > y2' do
+    it 'should still paint a correct vertical segment' do
+      x, y1, y2 = 5, 20, 10
+      n, m = @bitmap.size
+      @bitmap.vertical_segment(x, y1, y2, 'C')
+      (1..n).each do |i|
+        (1..m).each do |j|
+          if i == x && j.between?(y2, y1)
+            expect(@bitmap.get_colour(i, j)).to eq('C')
+          else
+            expect(@bitmap.get_colour(i, j)).to eq('O')
+          end
+        end
+      end
+    end
+  end
 end
 
 RSpec.describe Bitmap, '#horizontal_segment' do

@@ -79,7 +79,7 @@ class Bitmap
 
   # Print the current state of a bitmap.
   def to_s
-    @bitmap.map {|row| row.join('')}.join("\n")
+    @bitmap.map {|row| row.join('')}.join("\n") + "\n"
   end
 
   private

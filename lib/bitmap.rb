@@ -17,7 +17,11 @@ class Bitmap
 
   # Clear the bitmap by setting all pixels to white (O)
   def clear()
-
+    (1..@bitmap.length).each do |i|
+      (1..@bitmap[0].length).each do |j|
+        @bitmap[i-1][j-1] = 'O'
+      end
+    end
   end
 
   # Get the colour of the pixel

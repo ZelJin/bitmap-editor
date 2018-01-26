@@ -7,12 +7,12 @@ class Bitmap
     unless n.between?(1, 250) && m.between?(1, 250)
       raise ArgumentError, "Bitmap size is out of range [1, 250]"
     end
-    @bitmap = Array.new(n, Array.new(m, 'O'))
+    @bitmap = Array.new(m, Array.new(n, 'O'))
   end
 
   # Return the size of the bitmap
   def size()
-    return @bitmap.length, @bitmap[0].length
+    return @bitmap[0].length, @bitmap.length
   end
 
   # Clear the bitmap by setting all pixels to white (O)
@@ -22,21 +22,21 @@ class Bitmap
 
   # Get the colour of the pixel
   def get_colour(x, y)
-    unless row_valid?(x) && column_valid?(y)
+    unless x_valid?(x) && y_valid?(y)
       raise ArgumentError, "Pixel (#{x}, #{y}) is out of range"
     end
-    @bitmap[x-1][y-1]
+    @bitmap[y-1][x-1]
   end
 
   # Colour the pixel (x, y) with colour c
   def set_colour(x, y, c)
-    unless row_valid?(x) && column_valid?(y)
+    unless x_valid?(x) && y_valid?(y)
       raise ArgumentError, "Pixel (#{x}, #{y}) is out of range"
     end
     unless colour_valid?(c)
       raise ArgumentError, "Incorrect colour #{c}"
     end
-    @bitmap[x-1][y-1] = c
+    @bitmap[y-1][x-1] = c
   end
 
   # Draw a vertical segment of colour c in column x between
@@ -58,12 +58,13 @@ class Bitmap
 
   private
 
-  def row_valid?(x)
-    x.between?(1, @bitmap.length)
+
+  def x_valid?(x)
+    x.between?(1, @bitmap[0].length)
   end
 
-  def column_valid?(y)
-    y.between?(1, @bitmap[0].length)
+  def y_valid?(y)
+    y.between?(1, @bitmap.length)
   end
 
   def colour_valid?(c)

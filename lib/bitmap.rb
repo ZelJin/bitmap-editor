@@ -46,7 +46,16 @@ class Bitmap
   # Draw a vertical segment of colour c in column x between
   # rows y1 and y2 (inclusive)
   def vertical_segment(x, y1, y2, c)
-
+    unless x_valid?(x) && y_valid?(y1) && y_valid?(y2)
+      raise ArgumentError, "Coordinates are out of range"
+    end
+    unless colour_valid?(c)
+      raise ArgumentError, "Incorrect colour #{c}"
+    end
+    ymin, ymax = [y1, y2].minmax
+    (ymin..ymax).each do |i|
+      @bitmap[i-1][x-1] = c
+    end
   end
 
   # Draw a horizontal segment of colour c in row y between

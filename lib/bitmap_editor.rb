@@ -66,7 +66,7 @@ class BitmapEditor
   # Print error message if not
   def bitmap_present?(bitmap)
     puts 'There is no image' if bitmap.nil?
-    return bitmap.nil?
+    return !bitmap.nil?
   end
 
   # Check if arguments are correct for particular command

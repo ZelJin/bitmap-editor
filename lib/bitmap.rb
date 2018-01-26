@@ -39,4 +39,13 @@ class Bitmap
   def to_s()
 
   end
+  private
+
+  def row_valid?(x)
+    x.between?(1, @bitmap[0].length)
+  end
+
+  def column_valid?(y)
+    y.between?(1, @bitmap.length)
+  end
 end

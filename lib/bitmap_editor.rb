@@ -20,7 +20,7 @@ class BitmapEditor
         end
       when 'C'
         # Clear command
-        break unless bitmap_present?(bitmap)
+        next unless bitmap_present?(bitmap)
         bitmap.clear
       when 'L'
         # Colour pixel command

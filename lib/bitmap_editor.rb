@@ -71,7 +71,7 @@ class BitmapEditor
   # Check if arguments are correct for particular command
   # Print error message if not
   def args_correct?(args, target_length, usage)
-    return args.length < target_length
     puts 'Invalid arguments. Usage: #{usage}' if args.length < target_length
+    return args.length >= target_length
   end
 end

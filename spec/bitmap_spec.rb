@@ -226,7 +226,7 @@ RSpec.describe Bitmap, '#horizontal_segment' do
   end
 
   context 'when x1 <= x2' do
-    it 'should paint a correct vertical segment' do
+    it 'should paint a correct horizontal segment' do
       x1, x2, y = 1, 20, 5
       n, m = @bitmap.size
       @bitmap.horizontal_segment(x1, x2, y, 'C')
@@ -243,7 +243,7 @@ RSpec.describe Bitmap, '#horizontal_segment' do
   end
 
   context 'when x1 > x2' do
-    it 'should still paint a correct vertical segment' do
+    it 'should still paint a correct horizontal segment' do
       x1, x2, y = 20, 10, 5
       n, m = @bitmap.size
       @bitmap.horizontal_segment(x1, x2, y, 'C')

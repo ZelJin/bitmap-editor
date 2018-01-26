@@ -27,21 +27,19 @@ RSpec.describe Bitmap, '#initialize' do
   end
 
   context 'when n or m are correct' do
-    n, m = 24, 25
+    n, m = 10, 20
     bitmap = Bitmap.new(n, m)
-    bm = bitmap.bitmap
+    rows, columns = bitmap.size
     it 'should have correct row length' do
-      expect(bm.length).to be(m)
+      expect(rows).to be(n)
     end
     it 'should have correct column length' do
-      (1..m).each do |i|
-        expect(bm[i-1].length).to be(n)
-      end
+      expect(columns).to be(m)
     end
     it 'should have correct pixel color' do
-      (1..m).each do |i|
-        (1..n).each do |j|
-          expect(bm[i-1][j-1]).to eq('O')
+      (1..n).each do |i|
+        (1..m).each do |j|
+          expect(bitmap.get_colour(i, j)).to eq('O')
         end
       end
     end
@@ -84,11 +82,13 @@ RSpec.describe Bitmap, '#set_colour' do
   context 'when parameters are correct' do
     it 'should paint the correct pixel' do
       @bitmap.set_colour(1, 1, 'C')
-      expect(@bitmap.bitmap[1-1][1-1]).to eq('C')
+      expect(@bitmap.get_colour(1, 1)).to eq('C')
       @bitmap.set_colour(2, 2, 'D')
-      expect(@bitmap.bitmap[2-1][2-1]).to eq('D')
+      expect(@bitmap.get_colour(2, 2)).to eq('D')
       @bitmap.set_colour(24, 25, 'E')
-      expect(@bitmap.bitmap[24-1][25-1]).to eq('E')
+      expect(@bitmap.get_colour(24, 25)).to eq('E')
+      @bitmap.set_colour(25, 12, 'F')
+      expect(@bitmap.get_colour(25, 12)).to eq('F')
     end
   end
 end

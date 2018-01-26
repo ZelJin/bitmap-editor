@@ -261,5 +261,58 @@ RSpec.describe Bitmap, '#horizontal_segment' do
 end
 
 RSpec.describe Bitmap, '#to_s' do
+  before (:each) do
+    @bitmap = Bitmap.new(3, 5)
+  end
 
+  context 'when the bitmap is empty' do
+    it 'shold display the bitmap correctly' do
+      expected_bitmap = "OOO\nOOO\nOOO\nOOO\nOOO\n"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the bitmap is painted with set_colour' do
+    it 'should still display the bitmap correctly' do
+      @bitmap.set_colour(1, 1, 'A')
+      @bitmap.set_colour(2, 2, 'B')
+      @bitmap.set_colour(3, 3, 'C')
+      @bitmap.set_colour(1, 4, 'D')
+      @bitmap.set_colour(2, 5, 'E')
+      expected_bitmap = "AOO\nOBO\nOOC\nDOO\nOEO\n"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the bitmap is painted with horizontal_segment' do
+    it 'should still display the bitmap correctly' do
+      @bitmap.horizontal_segment(1, 2, 1, 'A')
+      @bitmap.horizontal_segment(2, 3, 2, 'B')
+      @bitmap.horizontal_segment(3, 1, 4, 'C')
+      expected_bitmap = "AAO\nOBB\nOOO\nCCC\nOOO\n"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the bitmap is painted with vertical_segment' do
+    it 'should still display the bitmap correctly' do
+      @bitmap.vertical_segment(1, 1, 5, 'A')
+      @bitmap.vertical_segment(2, 3, 3, 'B')
+      @bitmap.vertical_segment(3, 4, 5, 'C')
+      expected_bitmap = "AOO\nAOO\nABO\nAOC\nAOC\n"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the bitmap is painted with a compination of methods' do
+    it 'should still display the bitmap correctly' do
+      @bitmap.set_colour(1, 1, 'A')
+      @bitmap.set_colour(2, 2, 'B')
+      @bitmap.set_colour(3, 3, 'C')
+      @bitmap.vertical_segment(2, 1, 4, 'D')
+      @bitmap.horizontal_segment(3, 1, 4, 'E')
+      expected_bitmap = "ADO\nODO\nODC\nEEE\nOOO\n"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
 end

@@ -69,12 +69,11 @@ class Bitmap
   end
 
   # Print the current state of a bitmap.
-  def to_s()
-
+  def to_s
+    @bitmap.map {|row| row.join('')}.join("\n")
   end
 
   private
-
 
   def x_valid?(x)
     x.between?(1, @bitmap[0].length)

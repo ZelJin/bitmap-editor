@@ -6,7 +6,6 @@ class BitmapEditor
     return puts 'please provide correct file' if file.nil? || !File.exists?(file)
     bitmap = nil
     File.readlines(file).each do |line|
-      puts line
       args = line.strip.split(' ')
       case args[0]
       when 'I'
@@ -15,7 +14,6 @@ class BitmapEditor
         # Try to create a bitmap. Catch an ArgumentError if it occurs
         begin
           bitmap = Bitmap.new(args[1].to_i, args[2].to_i)
-          puts bitmap
         rescue ArgumentError => err
           puts 'Argument error: ' + err.message
         end

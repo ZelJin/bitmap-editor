@@ -57,15 +57,24 @@ class Bitmap
       raise ArgumentError, "Incorrect colour #{c}"
     end
     ymin, ymax = [y1, y2].minmax
-    (ymin..ymax).each do |i|
-      self.set_colour(x, i, c)
+    (ymin..ymax).each do |j|
+      self.set_colour(x, j, c)
     end
   end
 
   # Draw a horizontal segment of colour c in row y between
   # columns x1 and x2 (inclusive)
   def horizontal_segment(x1, x2, y, c)
-
+    unless x_valid?(x1) && x_valid?(x2) && y_valid?(y)
+      raise ArgumentError, "Coordinates are out of range"
+    end
+    unless colour_valid?(c)
+      raise ArgumentError, "Incorrect colour #{c}"
+    end
+    xmin, xmax = [x1, x2].minmax
+    (xmin..xmax).each do |i|
+      self.set_colour(i, y, c)
+    end
   end
 
   # Print the current state of a bitmap.

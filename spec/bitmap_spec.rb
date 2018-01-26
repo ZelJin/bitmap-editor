@@ -46,10 +46,6 @@ RSpec.describe Bitmap, '#initialize' do
   end
 end
 
-RSpec.describe Bitmap, '#clear' do
-
-end
-
 RSpec.describe Bitmap, '#set_colour' do
   before (:each) do
     @bitmap = Bitmap.new(25, 25)
@@ -89,6 +85,43 @@ RSpec.describe Bitmap, '#set_colour' do
       expect(@bitmap.get_colour(24, 25)).to eq('E')
       @bitmap.set_colour(25, 12, 'F')
       expect(@bitmap.get_colour(25, 12)).to eq('F')
+    end
+  end
+end
+
+RSpec.describe Bitmap, '#clear' do
+  before (:each) do
+    @bitmap = Bitmap.new(25, 25)
+  end
+
+  context 'when the bitmap is clean' do
+    it 'should not change the bitmap' do
+      @bitmap.clear
+      n, m = @bitmap.size
+      (1..n).each do |i|
+        (1..m).each do |j|
+          expect(@bitmap.get_colour(i, j)).to eq('O')
+        end
+      end
+    end
+  end
+
+  context 'when the bitmap is not clean' do
+    it 'should clear all pixels' do
+      # Let's paint something on the bitmap first
+      n, m = @bitmap.size
+      (1..20).each do
+        x = 1 + Random.rand(n)
+        y = 1 + Random.rand(m)
+        @bitmap.set_colour(x, y, 'C')
+      end
+
+      @bitmap.clear
+      (1..n).each do |i|
+        (1..m).each do |j|
+          expect(@bitmap.get_colour(i, j)).to eq('O')
+        end
+      end
     end
   end
 end

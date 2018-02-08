@@ -325,7 +325,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
   context 'when the bitmap is empty' do
     it 'should fill the whole bitmap' do
       @bitmap.fill_bucket(3, 3, 'K')
-      expected_bitmap = "KKKKK\nKKKKK\nKKKKK\nKKKKK\nKKKKK"
+      expected_bitmap = "KKKKK\nKKKKK\nKKKKK\nKKKKK\nKKKKK\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end
@@ -337,7 +337,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
       @bitmap.set_colour(4, 3, 'A')
       @bitmap.set_colour(3, 4, 'A')
       @bitmap.fill_bucket(3, 3, 'K')
-      expected_bitmap = "OOOOO\nOOAOO\nOAKAO\nOOAOO\nOOOOO"
+      expected_bitmap = "OOOOO\nOOAOO\nOAKAO\nOOAOO\nOOOOO\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end
@@ -349,7 +349,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
       @bitmap.set_colour(4, 3, 'A')
       @bitmap.set_colour(3, 4, 'A')
       @bitmap.fill_bucket(1, 1, 'K')
-      expected_bitmap = "KKKKK\nKKAKK\nKAOAK\nKKAKK\nKKKKK"
+      expected_bitmap = "KKKKK\nKKAKK\nKAOAK\nKKAKK\nKKKKK\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end
@@ -360,7 +360,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
       @bitmap.set_colour(2, 3, 'A')
       @bitmap.set_colour(3, 4, 'A')
       @bitmap.fill_bucket(3, 3, 'K')
-      expected_bitmap = "KKKKK\nKKAKK\nKAKKK\nKKAKK\nKKKKK"
+      expected_bitmap = "KKKKK\nKKAKK\nKAKKK\nKKAKK\nKKKKK\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end
@@ -373,7 +373,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
       @bitmap.set_colour(3, 4, 'A')
       @bitmap.set_colour(3, 5, 'A')
       @bitmap.fill_bucket(4, 2, 'K')
-      expected_bitmap = "OOAKK\nOOAKK\nOAKKK\nOOAKK\nOOAKK"
+      expected_bitmap = "OOAKK\nOOAKK\nOAKKK\nOOAKK\nOOAKK\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end
@@ -386,7 +386,7 @@ RSpec.describe Bitmap, '#fill_bucket' do
       @bitmap.set_colour(2, 4, 'A')
       @bitmap.set_colour(2, 5, 'A')
       @bitmap.fill_bucket(2, 2, 'K')
-      expected_bitmap = "OKOOO\nOKOOO\nOKOOO\nOKOOO\nOKOOO"
+      expected_bitmap = "OKOOO\nOKOOO\nOKOOO\nOKOOO\nOKOOO\n"
       expect(@bitmap.to_s).to eq(expected_bitmap)
     end
   end

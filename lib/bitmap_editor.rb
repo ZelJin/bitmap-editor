@@ -60,7 +60,7 @@ class BitmapEditor
       when 'S'
         # Print bitmap command
         next unless bitmap_present?(bitmap)
-        puts bitmap.to_s
+        puts bitmap.to_s + "\n"
       else
         puts 'unrecognised command :('
       end

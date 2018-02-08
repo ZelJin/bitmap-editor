@@ -77,6 +77,12 @@ class Bitmap
     end
   end
 
+  # Fill the area with a specific colour, starting from point (x, y)
+  # Similar to a "bucket" command in paint
+  def fill_bucket(x, y, c)
+    #TODO: Implement the method
+  end
+
   # Print the current state of a bitmap.
   def to_s
     @bitmap.map {|row| row.join('')}.join("\n") + "\n"

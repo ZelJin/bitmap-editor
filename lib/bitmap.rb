@@ -77,9 +77,34 @@ class Bitmap
     end
   end
 
+  # Fill the area with a specific colour, starting from point (x, y)
+  # Similar to a "bucket" command in paint
+  def fill_bucket(x, y, c)
+    unless x_valid?(x) && y_valid?(y)
+      raise ArgumentError, 'Coordinates are out of range'
+    end
+    unless colour_valid?(c)
+      raise ArgumentError, "Incorrect colour #{c}"
+    end
+    c_init = self.get_colour(x, y)
+    self.fill_pixel(x, y, c_init, c)
+  end
+
   # Print the current state of a bitmap.
   def to_s
     @bitmap.map {|row| row.join('')}.join("\n") + "\n"
+  end
+
+  protected
+
+  def fill_pixel(x, y, c_init, c)
+    return unless x_valid?(x) && y_valid?(y)
+    return if self.get_colour(x, y) != c_init
+    self.set_colour(x, y, c)
+    self.fill_pixel(x-1, y, c_init, c)
+    self.fill_pixel(x+1, y, c_init, c)
+    self.fill_pixel(x, y-1, c_init, c)
+    self.fill_pixel(x, y+1, c_init, c)
   end
 
   private

@@ -53,7 +53,7 @@ class BitmapEditor
         next unless bitmap_present?(bitmap) && args_correct?(args, 4, 'F X Y C')
         # Try to fill a pixel. Catch an ArgumentError if it occurs
         begin
-          bitmap.fill_bucket(args[1].to_1, args[2].to_i, args[3])
+          bitmap.fill_bucket(args[1].to_i, args[2].to_i, args[3])
         rescue ArgumentError => err
           puts 'Argument error: ' + err.message
         end

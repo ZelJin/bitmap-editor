@@ -316,3 +316,78 @@ RSpec.describe Bitmap, '#to_s' do
     end
   end
 end
+
+RSpec.describe Bitmap, '#fill_bucket' do
+  before (:each) do
+    @bitmap = Bitmap.new(5, 5)
+  end
+
+  context 'when the bitmap is empty' do
+    it 'should fill the whole bitmap' do
+      @bitmap.fill_bucket(3, 3, 'K')
+      expected_bitmap = "KKKKK\nKKKKK\nKKKKK\nKKKKK\nKKKKK"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when there is a closed contour and initial point is inside the contour' do
+    it 'should only fill space inside a contour' do
+      @bitmap.set_colour(3, 2, 'A')
+      @bitmap.set_colour(2, 3, 'A')
+      @bitmap.set_colour(4, 3, 'A')
+      @bitmap.set_colour(3, 4, 'A')
+      @bitmap.fill_bucket(3, 3, 'K')
+      expected_bitmap = "OOOOO\nOOAOO\nOAKAO\nOOAOO\nOOOOO"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when there is a closed contour and initial point is outside the contour' do
+    it 'should only fill space outside a contour' do
+      @bitmap.set_colour(3, 2, 'A')
+      @bitmap.set_colour(2, 3, 'A')
+      @bitmap.set_colour(4, 3, 'A')
+      @bitmap.set_colour(3, 4, 'A')
+      @bitmap.fill_bucket(1, 1, 'K')
+      expected_bitmap = "KKKKK\nKKAKK\nKAOAK\nKKAKK\nKKKKK"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the contour is not closed' do
+    it 'should fill everything except for the contour' do
+      @bitmap.set_colour(3, 2, 'A')
+      @bitmap.set_colour(2, 3, 'A')
+      @bitmap.set_colour(3, 4, 'A')
+      @bitmap.fill_bucket(3, 3, 'K')
+      expected_bitmap = "KKKKK\nKKAKK\nKAKKK\nKKAKK\nKKKKK"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the line splits the picture in half and the initial point is outside the line' do
+    it 'should only fill one half of the image' do
+      @bitmap.set_colour(3, 1, 'A')
+      @bitmap.set_colour(3, 2, 'A')
+      @bitmap.set_colour(2, 3, 'A')
+      @bitmap.set_colour(3, 4, 'A')
+      @bitmap.set_colour(3, 5, 'A')
+      @bitmap.fill_bucket(4, 2, 'K')
+      expected_bitmap = "OOAKK\nOOAKK\nOAKKK\nOOAKK\nOOAKK"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+
+  context 'when the line splits picture in half and the initial point is on the line' do
+    it 'should only fill the line' do
+      @bitmap.set_colour(2, 1, 'A')
+      @bitmap.set_colour(2, 2, 'A')
+      @bitmap.set_colour(2, 3, 'A')
+      @bitmap.set_colour(2, 4, 'A')
+      @bitmap.set_colour(2, 5, 'A')
+      @bitmap.fill_bucket(2, 2, 'K')
+      expected_bitmap = "OKOOO\nOKOOO\nOKOOO\nOKOOO\nOKOOO"
+      expect(@bitmap.to_s).to eq(expected_bitmap)
+    end
+  end
+end

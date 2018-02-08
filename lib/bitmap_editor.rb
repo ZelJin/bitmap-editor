@@ -48,6 +48,15 @@ class BitmapEditor
         rescue ArgumentError => err
           puts 'Argument error: ' + err.message
         end
+      when 'F'
+        # Fill an area command
+        next unless bitmap_present?(bitmap) && args_correct?(args, 4, 'F X Y C')
+        # Try to fill a pixel. Catch an ArgumentError if it occurs
+        begin
+          bitmap.fill_bucket(args[1].to_1, args[2].to_i, args[3])
+        rescue ArgumentError => err
+          puts 'Argument error: ' + err.message
+        end
       when 'S'
         # Print bitmap command
         next unless bitmap_present?(bitmap)

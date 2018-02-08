@@ -95,10 +95,10 @@ class Bitmap
     @bitmap.map {|row| row.join('')}.join("\n") + "\n"
   end
 
-  private
+  protected
 
   def fill_pixel(x, y, c_init, c)
-    return unless x_valid?(x) && y_valid(y)
+    return unless x_valid?(x) && y_valid?(y)
     return if self.get_colour(x, y) != c_init
     self.set_colour(x, y, c)
     self.fill_pixel(x-1, y, c_init, c)
@@ -106,6 +106,8 @@ class Bitmap
     self.fill_pixel(x, y-1, c_init, c)
     self.fill_pixel(x, y+1, c_init, c)
   end
+
+  private
 
   def x_valid?(x)
     x.between?(1, @bitmap[0].length)
